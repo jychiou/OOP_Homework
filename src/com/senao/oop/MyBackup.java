@@ -1,6 +1,5 @@
 package com.senao.oop;
 
-import java.io.IOException;
 import java.util.List;
 
 import com.senao.oop.bean.Config;

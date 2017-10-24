@@ -8,13 +8,13 @@ package com.senao.oop.bean;
 public class Schedule {
 
 	// 此排程所處理的檔案格式
-	String ext;
+	private String ext;
 	
 	// 此排程所處理的時間
-	String time;
+	private String time;
 	
 	// 此排程執行的間隔
-	String interval;
+	private String interval;
 
 	public String getExt() {
 		return ext;

@@ -10,8 +10,8 @@ import com.senao.oop.bean.Config;
 
 public class ConfigManager extends BaseManager {
 
-	// 提供 List 存放多筆 Config 物件
-	List<Config> configs = new ArrayList<Config>();
+	// 提供 List<Config> 存放多筆 Config 物件
+	private List<Config> configs = new ArrayList<Config>();
 	
 	/**
 	 * 將 config.json 轉成 List<Config>
@@ -25,6 +25,10 @@ public class ConfigManager extends BaseManager {
 		configs.addAll(((ConfigManager)gson.fromJson(jsonStr, new TypeToken<ConfigManager>(){}.getType())).getConfigs());
 	}
 
+	/**
+	 * 取得設定清單
+	 * @return
+	 */
 	public List<Config> getConfigs() {
 		return configs;
 	}

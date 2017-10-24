@@ -8,31 +8,31 @@ package com.senao.oop.bean;
 public class Config {
 
 	// 檔案格式(副檔名)
-	String ext;
+	private String ext;
 	
 	// 要備份檔案的目錄
-	String location;
+	private String location;
 	
 	// 是否處理子目錄(true:處理子目錄； false:不 處理子目錄)
-	boolean subDirectory;
+	private boolean subDirectory;
 	
 	// 備份單位(file:以單一檔案為處理單位； directory:以整個目錄為處理單位)
-	String unit;
+	private String unit;
 	
 	// 處理完是否刪除檔案(true:刪除； false:不刪除)
-	boolean remove;
+	private boolean remove;
 	
 	// (zip:壓縮； encode:加密)
-	String handler;
+	private String handler;
 	
 	// 處理後要儲存到什麼地方(directory:目錄； db:資料庫)
-	String destination;
+	private String destination;
 	
 	// 處理後的目錄
-	String dir;
+	private String dir;
 	
 	// 設定資料庫連接字串
-	String connectionString;
+	private String connectionString;
 
 	public String getExt() {
 		return ext;

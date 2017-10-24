@@ -19,11 +19,12 @@ public abstract class BaseManager {
 		
 		String line = null;
 		
-		// 根據設定的字串做比對，都符合的字串才取用
+		// 逐行讀取
 		while ((line = br.readLine()) != null) {
 			s.append(line);
 		}
 		
+		br.close();
 		return s.toString();
 	}
 }

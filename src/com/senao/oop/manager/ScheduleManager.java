@@ -10,8 +10,8 @@ import com.senao.oop.bean.Schedule;
 
 public class ScheduleManager extends BaseManager {
 
-	// 提供 List 存放多筆 Schedule 物件
-	List<Schedule> schedules = new ArrayList<Schedule>();
+	// 提供 List<Schedule> 存放多筆 Schedule 物件
+	private List<Schedule> schedules = new ArrayList<Schedule>();
 
 	/**
 	 * 將 schedule.json 轉成 List<Schedule>
@@ -25,6 +25,10 @@ public class ScheduleManager extends BaseManager {
 		schedules.addAll(((ScheduleManager)gson.fromJson(jsonStr, new TypeToken<ScheduleManager>(){}.getType())).getSchedules());
 	}
 	
+	/**
+	 * 取得排程清單
+	 * @return
+	 */
 	public List<Schedule> getSchedules() {
 		return schedules;
 	}
