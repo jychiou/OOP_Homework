@@ -15,7 +15,7 @@ public abstract class JsonManager {
 	 * @return
 	 * @throws IOException
 	 */
-	protected String readTxtFile(String filePath) throws IOException {
+	public static String readTxtFile(String filePath) throws IOException {
 		StringBuffer s = new StringBuffer();
 		FileReader fileReader = new FileReader(filePath);
 		BufferedReader br = new BufferedReader(fileReader);

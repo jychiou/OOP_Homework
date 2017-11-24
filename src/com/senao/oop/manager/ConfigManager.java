@@ -18,7 +18,7 @@ public class ConfigManager extends JsonManager {
 	 * 
 	 * @return
 	 */
-	private List<Config> getConfigs() {
+	public List<Config> getConfigs() {
 		return configs;
 	}
 
