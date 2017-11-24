@@ -3,5 +3,5 @@
 "encode": "com.senao.oop.handler.EncodeHandler",
 "zip": "com.senao.oop.handler.ZipHandler",
 "directory": "com.senao.oop.handler.DirectoryHandler",
-"db": "com.senao.oop.handler.DBHandler"
+"db": "com.senao.oop.handler.DBAdapter"
 }

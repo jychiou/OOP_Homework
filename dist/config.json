@@ -7,7 +7,7 @@
 		"unit": "file",
 		"remove": false,
 		"handlers": ["zip", "encode"],
-		"destination": "directory",
+		"destination": "db",
 		"dir": "D:\\014616\\workspace\\_Support\\OOP_Homework\\dist\\_target",
 		"connectionString": ""
 		}
