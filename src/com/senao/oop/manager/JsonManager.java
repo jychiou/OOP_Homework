@@ -3,8 +3,11 @@ package com.senao.oop.manager;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Type;
 
-public abstract class BaseManager {
+import com.google.gson.Gson;
+
+public abstract class JsonManager {
 
 	/**
 	 * 讀取文字檔
@@ -27,4 +30,24 @@ public abstract class BaseManager {
 		br.close();
 		return s.toString();
 	}
+	
+	/**
+	 * 讀取json檔成一個Object
+	 * @param jsonFilePath
+	 * @param type
+	 * @return
+	 * @throws IOException
+	 */
+	protected Object getJsonObject(String jsonFilePath, Type type) throws IOException {
+		Gson gson = new Gson();
+		String jsonStr = readTxtFile(jsonFilePath);
+
+		return gson.fromJson(jsonStr, type);
+	}
+	
+	/**
+	 * 讀取 json 檔
+	 * @throws IOException
+	 */
+	public abstract void processJsonConfig() throws IOException;
 }

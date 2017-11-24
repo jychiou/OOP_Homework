@@ -27,4 +27,15 @@ public class Schedule {
 	public String getInterval() {
 		return interval;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuffer strBuff = new StringBuffer();
+		
+		strBuff.append("ext:" + getExt() + "\n");					// 此排程所處理的檔案格式
+		strBuff.append("time:" + getTime() + "\n");					// 此排程所處理的時間
+		strBuff.append("interval:" + getInterval() + "\n");			// 此排程執行的間隔
+		
+		return strBuff.toString();
+	}
 }

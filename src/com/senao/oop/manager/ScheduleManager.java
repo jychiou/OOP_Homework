@@ -4,40 +4,40 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.senao.oop.bean.Schedule;
 
-public class ScheduleManager extends BaseManager {
+public class ScheduleManager extends JsonManager {
+
+	private static String jsonFilePath = "D:/014616/workspace/_Support/OOP_Homework/dist/schedule.json";
 
 	// 提供 List<Schedule> 存放多筆 Schedule 物件
 	private List<Schedule> schedules = new ArrayList<Schedule>();
 
 	/**
-	 * 將 schedule.json 轉成 List<Schedule>
-	 * @param scheduleFilePath
-	 * @throws IOException 
-	 */
-	public void ProcessSchedules(String scheduleFilePath) throws IOException {
-		Gson gson = new Gson();
-		
-		String jsonStr = readTxtFile(scheduleFilePath);
-		schedules.addAll(((ScheduleManager)gson.fromJson(jsonStr, new TypeToken<ScheduleManager>(){}.getType())).getSchedules());
-	}
-	
-	/**
 	 * 取得排程清單
+	 * 
 	 * @return
 	 */
-	public List<Schedule> getSchedules() {
+	private List<Schedule> getSchedules() {
 		return schedules;
 	}
-	
-	/**
-	 * 提供 List 的 筆數
-	 * @return
-	 */
-	public int Count() {
-		return schedules.size();
+
+	@Override
+	public void processJsonConfig() throws IOException {
+		schedules.addAll(((ScheduleManager) getJsonObject(jsonFilePath, ScheduleManager.class)).getSchedules());
+	}
+
+	@Override
+	public String toString() {
+		StringBuffer strBuff = new StringBuffer();
+
+		strBuff.append("--------------- Schedules ---------------\n");
+
+		for (int i = 0; i < schedules.size(); i++) {
+			strBuff.append(schedules.get(i).toString());
+			strBuff.append("-----------------------------------------\n");
+		}
+
+		return strBuff.toString();
 	}
 }

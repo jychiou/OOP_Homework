@@ -4,40 +4,40 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.senao.oop.bean.Config;
 
-public class ConfigManager extends BaseManager {
+public class ConfigManager extends JsonManager {
+
+	private static String jsonFilePath = "D:/014616/workspace/_Support/OOP_Homework/dist/config.json";
 
 	// 提供 List<Config> 存放多筆 Config 物件
 	private List<Config> configs = new ArrayList<Config>();
-	
-	/**
-	 * 將 config.json 轉成 List<Config>
-	 * @param configFilePath
-	 * @throws IOException 
-	 */
-	public void ProcessConfigs(String configFilePath) throws IOException {
-		Gson gson = new Gson();
-		
-		String jsonStr = readTxtFile(configFilePath);
-		configs.addAll(((ConfigManager)gson.fromJson(jsonStr, new TypeToken<ConfigManager>(){}.getType())).getConfigs());
-	}
 
 	/**
 	 * 取得設定清單
+	 * 
 	 * @return
 	 */
-	public List<Config> getConfigs() {
+	private List<Config> getConfigs() {
 		return configs;
 	}
+
+	@Override
+	public void processJsonConfig() throws IOException {
+		configs.addAll(((ConfigManager)getJsonObject(jsonFilePath, ConfigManager.class)).getConfigs());
+	}
 	
-	/**
-	 * 提供 List 的 筆數
-	 * @return
-	 */
-	public int Count() {
-		return configs.size();
+	@Override
+	public String toString() {
+		StringBuffer strBuff = new StringBuffer();
+		
+		strBuff.append("--------------- Configs -----------------\n");
+		
+		for(int i=0; i<configs.size(); i++) {
+			strBuff.append(configs.get(i).toString());
+			strBuff.append("-----------------------------------------\n");
+		}
+
+		return strBuff.toString();
 	}
 }
