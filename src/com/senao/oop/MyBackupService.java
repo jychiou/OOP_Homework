@@ -1,18 +1,13 @@
 package com.senao.oop;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.attribute.BasicFileAttributes;
-import java.nio.file.attribute.FileTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.senao.oop.bean.Candidate;
 import com.senao.oop.bean.Config;
+import com.senao.oop.file.FileFinder;
 import com.senao.oop.handler.Handler;
-import com.senao.oop.handler.HandlerFactory;
 import com.senao.oop.manager.ConfigManager;
 import com.senao.oop.manager.JsonManager;
 import com.senao.oop.manager.ScheduleManager;
@@ -45,13 +40,23 @@ public class MyBackupService {
 			//System.out.println(managers.get(i));
 		}
 		
-		List<Candidate> candidates = this.findFiles();
+
+		List<Config> configs = configManager.getConfigs();
 		
-		for(Candidate candidate : candidates) {
-			this.broadcastToHandlers(candidate);
+		for(Config config : configs) {
+			System.out.println(config);
+			
+			// 當每個檔案要對各 handler 做廣播時，才去產生檔案資訊 的 Candidate 物件
+			FileFinder<Candidate> fileFinder =	FileFinderFactory.create("file", config);					
+			System.out.println(fileFinder);
+			
+			for(Candidate candidate : fileFinder) {
+				System.out.println(candidate);
+				
+				this.broadcastToHandlers(candidate);
+			}
 		}
 	}
-	
 	
 	/**
 	 * 在建構式中將要執行的 Manager 加入
@@ -72,68 +77,13 @@ public class MyBackupService {
 		List<Handler> handlers = this.findHandlers(candidate);
 		
 		byte[] target = null;
-		
+
 		for(Handler handler : handlers)	{
 			if(handler==null)
 				continue;
 			target = handler.perform(candidate, target);
 		}
 	}
-	
-	/**
-	 * 得知總共有哪些 candidate (將於 Homework 4  討論)
-	 * @return
-	 * @throws Exception 
-	 */
-	private List<Candidate> findFiles() throws Exception {
-		
-		List<Candidate> candidateList = new ArrayList<Candidate>();
-
-		// TODO  Homework 4
-		
-		List<Config> configs = configManager.getConfigs();
-
-		int i = 0;
-		for(Config config : configs) {
-			System.out.println(config);
-			
-			String processName = "processName" + i++;
-			
-			File folder = new File(config.getLocation());
-			List<File> fileList = getFile(folder, config.getExt(), config.isSubDirectory());
-			
-			for(File file : fileList) {
-				String name = file.getPath();
-				
-				BasicFileAttributes attributes = Files.readAttributes(Paths.get(name), BasicFileAttributes.class);
-				FileTime creationTime = attributes.creationTime();
-				long size = attributes.size();
-				
-				Candidate candidate = new Candidate(config, creationTime.toString(), name, processName, size);
-				System.out.println(candidate);
-				candidateList.add(candidate);
-			}
-		}
-		
-		return candidateList;
-	}
-	
-	private List<File> getFile(File folder, String ext, boolean subDirectory) {
-		List<File> fileList = new ArrayList<File>();
-		
-		for(File file : folder.listFiles()) {
-			if(file.isDirectory()) {
-				if(subDirectory)
-					fileList.addAll(getFile(file, ext, subDirectory));
-			} else if (file.isFile() && file.getName().endsWith("." + ext)) {
-				fileList.add(file);
-			}
-		}
-		
-		return fileList;
-	}
-	
-	
 	
 	/**
 	 * 找出 Candidate 的 Config 中指定的 Handler

@@ -1,10 +1,11 @@
-package com.senao.oop.handler;
+package com.senao.oop;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.util.Map;
 
 import com.google.gson.Gson;
+import com.senao.oop.handler.Handler;
 import com.senao.oop.manager.JsonManager;
 
 /**

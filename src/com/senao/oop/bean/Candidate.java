@@ -58,11 +58,13 @@ public class Candidate {
 	public String toString() {
 		StringBuffer strBuff = new StringBuffer();
 			
+		strBuff.append("===========Candidate===========\n");
 		strBuff.append("= config:" + getConfig() + "\n");				// 所根據的 Config 物件，由 constructor 傳入
 		strBuff.append("= fileDateTime:" + getFileDateTime() + "\n");	// 檔案的日期與時間
 		strBuff.append("= name:" + getName() + "\n");					// 檔案名稱
 		strBuff.append("= processName:" + getProcessName() + "\n");	// 處理檔案的 process(以後會用到)
 		strBuff.append("= size:" + getSize() + "\n");					// 檔案 size
+		strBuff.append("===============================\n");
 		
 		return strBuff.toString();
 	}
