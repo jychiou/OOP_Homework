@@ -1,6 +1,6 @@
 package com.senao.oop.handler;
 
-import com.senao.oop.bean.Candidate;
+import com.senao.oop.candidate.Candidate;
 
 /**
  * 所有 handler 的抽象化 interface，使用端只依賴此 interface，

@@ -1,35 +1,35 @@
-package com.senao.oop.bean;
+package com.senao.oop.candidate;
+
+import java.util.Date;
+
+import com.senao.oop.bean.Config;
 
 /**
  * 描述待處理檔案的資訊
  * @author 014616
  *
  */
-public class Candidate {
+public final class Candidate {
 
 	// 所根據的 Config 物件，由 constructor 傳入
-	private Config config;
+	private final Config config;
 	
 	// 檔案的日期與時間
-	private String fileDateTime;
+	private final Date fileDateTime;
 	
 	// 檔案名稱
-	private String name;
+	private final String name;
 	
 	// 處理檔案的 process(以後會用到)
-	private String processName;
+	private final String processName;
 	
 	// 檔案 size
-	private long size;
+	private final long size;
 	
-	public Candidate() {
-		
-	}
-
-	public Candidate(Config config, String fileDateTime, String name, String processName, long size) {
+	protected Candidate(Config config, String name, Date fileDateTime, String processName, long size) {
 		this.config = config;
-		this.fileDateTime = fileDateTime;
 		this.name = name;
+		this.fileDateTime = fileDateTime;
 		this.processName = processName;
 		this.size = size;
 	}
@@ -38,7 +38,7 @@ public class Candidate {
 		return config;
 	}
 
-	public String getFileDateTime() {
+	public Date getFileDateTime() {
 		return fileDateTime;
 	}
 
@@ -57,7 +57,7 @@ public class Candidate {
 	@Override
 	public String toString() {
 		StringBuffer strBuff = new StringBuffer();
-			
+
 		strBuff.append("===========Candidate===========\n");
 		strBuff.append("= config:" + getConfig() + "\n");				// 所根據的 Config 物件，由 constructor 傳入
 		strBuff.append("= fileDateTime:" + getFileDateTime() + "\n");	// 檔案的日期與時間

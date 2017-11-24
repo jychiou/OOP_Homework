@@ -10,7 +10,7 @@ public abstract class AbstractFileFinder<Candidate> implements FileFinder<Candid
 
 	protected Config config;
 	protected List<String> files = new ArrayList<String>();
-	protected int index = -1;
+	private int index = -1;
 
 	protected AbstractFileFinder(Config config) {
 		if (config != null)

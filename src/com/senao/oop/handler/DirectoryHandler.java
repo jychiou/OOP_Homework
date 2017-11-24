@@ -4,7 +4,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import com.senao.oop.bean.Candidate;
+import com.senao.oop.candidate.Candidate;
 
 /**
  * 處理方式 - 儲存到其他目錄

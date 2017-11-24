@@ -1,6 +1,6 @@
 package com.senao.oop.handler;
 
-import com.senao.oop.bean.Candidate;
+import com.senao.oop.candidate.Candidate;
 
 /**
  * 處理方式 - 儲存到資料庫

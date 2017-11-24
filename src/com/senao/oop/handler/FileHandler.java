@@ -4,7 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import com.senao.oop.bean.Candidate;
+import com.senao.oop.candidate.Candidate;
 
 /**
  * 將檔案轉成 byte[]，或將 byte[] 轉成檔案

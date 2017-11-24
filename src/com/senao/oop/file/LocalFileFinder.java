@@ -7,9 +7,11 @@ import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-import com.senao.oop.bean.Candidate;
+import com.senao.oop.candidate.Candidate;
+import com.senao.oop.candidate.CandidateFactory;
 import com.senao.oop.bean.Config;
 
 /**
@@ -47,6 +49,10 @@ public class LocalFileFinder extends AbstractFileFinder<Candidate> {
 
 		try {
 			File file = new File(fileName);
+			
+			if(!file.exists())
+				return null;
+			
 			String name = file.getPath();
 			
 			BasicFileAttributes attributes = Files.readAttributes(Paths.get(name), BasicFileAttributes.class);
@@ -54,7 +60,8 @@ public class LocalFileFinder extends AbstractFileFinder<Candidate> {
 			FileTime creationTime = attributes.creationTime();
 			long size = attributes.size();
 			
-			return new Candidate(config, creationTime.toString(), name, "processName", size);
+			// Candidate 只剩下 CandidateFactory 可以 new ，其	他的 class 都不能 new
+			return CandidateFactory.create(config, name, new Date(creationTime.toMillis()), "processName", size);
 			
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -1,6 +1,6 @@
 package com.senao.oop.handler;
 
-import com.senao.oop.bean.Candidate;
+import com.senao.oop.candidate.Candidate;
 import com.senao.oop.util.AESencrp;
 
 /**

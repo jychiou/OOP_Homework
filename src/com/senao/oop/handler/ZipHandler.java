@@ -4,7 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import com.senao.oop.bean.Candidate;
+import com.senao.oop.candidate.Candidate;
 
 /**
  * 處理方式 - 壓縮

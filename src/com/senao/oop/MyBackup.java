@@ -19,7 +19,7 @@ public class MyBackup {
 	public static void main(String[] args) throws Exception {
 
 		MyBackupService myBackupService = new MyBackupService();
-		myBackupService.processJSONConfig();
-		myBackupService.doBackup();
+		myBackupService.simpleBackup(); // 簡單備份
+		//myBackupService.scheduledBackup(); // 排程備份
 	}
 }

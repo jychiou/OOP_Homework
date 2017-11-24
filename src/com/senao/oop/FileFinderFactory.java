@@ -1,6 +1,6 @@
 package com.senao.oop;
 
-import com.senao.oop.bean.Candidate;
+import com.senao.oop.candidate.Candidate;
 import com.senao.oop.bean.Config;
 import com.senao.oop.file.FileFinder;
 import com.senao.oop.file.LocalFileFinder;
