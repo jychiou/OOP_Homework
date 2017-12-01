@@ -1,0 +1,35 @@
+@startuml OOP_Homework3_ClassDiagram
+
+class HandlerFactory {
+	{static} -handlerDictionary
+	
+	{static} +create()
+}
+
+interface Handler {
+	+perform()
+}
+
+abstract class AbstractHandler implements Handler {
+	+perform()
+}
+
+class DirectoryHandler extends AbstractHandler {
+	+perform()
+}
+
+class EncodeHandler extends AbstractHandler {
+	+perform()
+}
+
+class FileHandler extends AbstractHandler {
+	+perform()
+}
+
+class ZipHandler extends AbstractHandler {
+	+perform()
+}
+
+HandlerFactory *-> Handler
+
+@enduml

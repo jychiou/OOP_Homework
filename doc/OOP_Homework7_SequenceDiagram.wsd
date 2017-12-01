@@ -1,0 +1,14 @@
+@startuml OOP_Homework7_SequenceDiagram
+
+actor User
+User -> MyBackupService : simpleBackup()
+MyBackupService -> TaskDispatcher : simpleTask(managers)
+TaskDispatcher -> TaskFactory : create()
+activate TaskFactory
+create SimpleTask
+TaskFactory -->> SimpleTask : new
+TaskDispatcher <<-- TaskFactory : Task
+deactivate TaskFactory
+TaskDispatcher -> SimpleTask : execute()
+
+@enduml

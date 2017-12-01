@@ -1,0 +1,28 @@
+@startuml OOP_Homework2_ClassDiagram
+
+class MyBackupService {
+	-managers
+	-processJsonConfigs()
+}
+
+abstract class JsonManager {
+	{static} +readTxtFile()
+	#getJsonObject()
+	{abstract} +processJsonConfig()
+}
+
+class ConfigManager extends JsonManager {
+	-configs
+	+getConfigs()
+	+processJsonConfig()
+}
+
+class ScheduleManager extends JsonManager {
+	-schedules
+	-getSchedules()
+	+processJsonConfig()
+}
+
+MyBackupService *-> JsonManager
+
+@enduml

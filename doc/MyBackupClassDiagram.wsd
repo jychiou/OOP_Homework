@@ -1,0 +1,178 @@
+@startuml MyBackupClassDiagram
+
+class MyBackup {
+	{static} +main()
+}
+
+class Config {
+	+ext
+	+location
+	+subDirectory
+	+unit
+	+remove
+	+handlers
+	+destination
+	+dir
+	+connectionString
+}
+
+class Schedule {
+	+ext
+	+time
+	+interval
+}
+
+MyBackup *-> MyBackupService
+
+
+
+abstract class JsonManager {
+	{static} +readTxtFile()
+	#getJsonObject()
+	{abstract} +processJsonConfig()
+}
+
+class ConfigManager extends JsonManager {
+	-configs
+	+getConfigs()
+	+processJsonConfig()
+}
+
+class ScheduleManager extends JsonManager {
+	-schedules
+	-getSchedules()
+	+processJsonConfig()
+}
+
+ConfigManager *-> Config
+ScheduleManager *-> Schedule
+MyBackupService *-> JsonManager
+
+
+
+class HandlerFactory {
+	{static} -handlerDictionary
+	
+	{static} +create()
+}
+
+interface Handler {
+	+perform()
+}
+
+abstract class AbstractHandler implements Handler {
+	+perform()
+}
+
+class DirectoryHandler extends AbstractHandler {
+	+perform()
+}
+
+class EncodeHandler extends AbstractHandler {
+	+perform()
+}
+
+class FileHandler extends AbstractHandler {
+	+perform()
+}
+
+class ZipHandler extends AbstractHandler {
+	+perform()
+}
+
+HandlerFactory *-> Handler
+
+
+
+
+class FileFinderFactory {
+	{static} +create()
+}
+
+interface FileFinder extends Iterable, Iterator {
+}
+
+abstract class AbstractFileFinder implements FileFinder {
+	#config
+	#files
+	-index
+	
+	+hasNext()
+	+next()
+	+remove()
+	+iterator()
+	{abstract} #createCandidate()
+}
+
+class LocalFileFinder extends AbstractFileFinder {
+	-getFile()
+	#createCandidate()
+}
+
+FileFinderFactory *-> FileFinder
+LocalFileFinder .> CandidateFactory
+
+
+
+
+class MyBackupService {
+	-managers
+	-taskDispatcher
+	
+	-init()
+	-processJsonConfigs()
+	+scheduledBackup()
+	+simpleBackup()
+}
+
+class CandidateFactory {
+}
+
+class Candidate {
+	+config
+	+fileDateTime
+	+name
+	+processName
+	+size
+	
+	#Candidate()
+}
+
+CandidateFactory .> Candidate
+
+
+class TaskDispatcher {
+	+scheduledTask()
+	+simpleTask()
+}
+
+class TaskFactory {
+	+create()
+}
+
+interface Task {
+	+execute()
+}
+
+abstract class AbstractTask implements Task {
+	#fileFinder
+	
+	+execute()
+	#broadcastToHandlers()	
+	#findHandlers()
+}
+
+class SimpleTask extends AbstractTask {
+	+execute()
+}
+
+class ScheduledTask extends AbstractTask {
+	+execute()
+}
+
+TaskFactory *-> Task
+TaskDispatcher .> TaskFactory
+MyBackupService .> TaskDispatcher
+AbstractTask .> FileFinderFactory
+
+@enduml

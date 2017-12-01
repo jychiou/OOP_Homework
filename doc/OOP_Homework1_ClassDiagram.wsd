@@ -1,0 +1,36 @@
+@startuml OOP_Homework1_ClassDiagram
+
+class Config {
+	+ext
+	+location
+	+subDirectory
+	+unit
+	+remove
+	+handlers
+	+destination
+	+dir
+	+connectionString
+}
+
+class Schedule {
+	+ext
+	+time
+	+interval
+}
+
+class ConfigManager {
+	-configs
+	+getConfigs()
+	+processJsonConfig()
+}
+
+class ScheduleManager {
+	-schedules
+	-getSchedules()
+	+processJsonConfig()
+}
+
+ConfigManager *-> Config
+ScheduleManager *-> Schedule
+
+@enduml

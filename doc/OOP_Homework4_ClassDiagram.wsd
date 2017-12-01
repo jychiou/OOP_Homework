@@ -1,0 +1,29 @@
+@startuml OOP_Homework4_ClassDiagram
+
+class FileFinderFactory {
+	{static} +create()
+}
+
+interface FileFinder extends Iterable, Iterator {
+}
+
+abstract class AbstractFileFinder implements FileFinder {
+	#config
+	#files
+	-index
+	
+	+hasNext()
+	+next()
+	+remove()
+	+iterator()
+	{abstract} #createCandidate()
+}
+
+class LocalFileFinder extends AbstractFileFinder {
+	-getFile()
+	#createCandidate()
+}
+
+FileFinderFactory *-> FileFinder
+
+@enduml

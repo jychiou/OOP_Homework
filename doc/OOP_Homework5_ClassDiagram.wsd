@@ -1,0 +1,62 @@
+@startuml OOP_Homework5_ClassDiagram
+
+class MyBackupService {
+	-managers
+	-taskDispatcher
+	
+	-init()
+	-processJsonConfigs()
+	+scheduledBackup()
+	+simpleBackup()
+}
+
+class CandidateFactory {
+}
+
+class Candidate {
+	+config
+	+fileDateTime
+	+name
+	+processName
+	+size
+	
+	#Candidate()
+}
+
+CandidateFactory .> Candidate
+
+
+class TaskDispatcher {
+	+scheduledTask()
+	+simpleTask()
+}
+
+class TaskFactory {
+	+create()
+}
+
+interface Task {
+	+execute()
+}
+
+abstract class AbstractTask implements Task {
+	#fileFinder
+	
+	+execute()
+	#broadcastToHandlers()	
+	#findHandlers()
+}
+
+class SimpleTask extends AbstractTask {
+	+execute()
+}
+
+class ScheduledTask extends AbstractTask {
+	+execute()
+}
+
+TaskFactory *-> Task
+TaskDispatcher .> TaskFactory
+MyBackupService .> TaskDispatcher
+
+@enduml
